@@ -1,0 +1,22 @@
+﻿  MODELE 1_ROBOT_2024 :
+ 
+
+  1 BOUCLES DE REFERENCE CIRCULAIRE TROUVEES
+ 
+
+   N° de boucle 1
+
+   Profondeur de la boucle = 4
+
+Numéro de fonction 73 (COMPOSANT, ID = 2560) 
+  dans le modèle 1_ROBOT_2024 se refère à:
+
+Numéro de fonction 6 (EXTRUSION_1, ID = 156) 
+  dans le modèle ETAGE_TOIT doit suivre:
+
+Numéro de fonction 5 (ESQUISSE_1, ID = 96) 
+  dans le modèle ETAGE_TOIT se refère à:
+
+Numéro de fonction 73 (COMPOSANT, ID = 2560) 
+  dans le modèle 1_ROBOT_2024 - cercle fermé.
+

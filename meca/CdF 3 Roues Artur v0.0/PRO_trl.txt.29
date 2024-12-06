@@ -1,0 +1,56 @@
+﻿!UI trail file version 1
+!Application name  `PRO`
+! Message Dialog: Info
+!               : Les données non enregistrées risquent d'avoir été perdues.
+~ Activate `UI Message Dialog` `ok`
+~ Activate `lic_exitdlg` `Retry`
+!%CILa licence CREOPMA_Student6 a été récupérée. Vous pouvez reprendre.
+!%CILa licence flottante a été récupérée. Vous pouvez reprendre.
+~ Activate `warning` `Ok`
+~ Power `UI Desktop` `UI Desktop` 5
+! Message Dialog: Info
+!               : Les données non enregistrées risquent d'avoir été perdues.
+~ Activate `UI Message Dialog` `ok`
+~ LButtonArm `main_dlg_cur` `proe_win` 9 903 353 0 1 1532 768 1920 1080 18700766
+~ LButtonDisarm `main_dlg_cur` `proe_win` 9 903 353 0 0 1532 768 1920 1080 18700936
+@sel_pz_xyz 650.5126953125 455.9326171875 802.9923820869 440.2639901565 0.0000000000
+@ sel view 0
+ 0.640359 -0.172165 -0.963094 -0.529226 0.907154 -0.514046
+ 0.822868 0.717413 0.418877 524.662567 291.925192 -1701.977491 1.953125 0.000000 0
+@ stack attr 8
+@ stack attr -1 -1  1
+@ stack attr twk_s_eps
+~ Move `main_dlg_cur` `proe_win` 9 903 353 33554432 0 1532 768 1920 1080 18701467
+>M Chain_oa_sel_CB ProeWin0 903 353 c0 20000 1532 0 0 768 1920 0 0 1080 13
+~ Key `main_dlg_cur` `proe_win` 9 903 353 38993939 0 1532 768 1920 1080 18701467 `Ctrl+S`
+~ Command `ProCmdModelSave` 
+~ Activate `storage_conflicts` `OK_PushButton`
+!%CIROBOT a été sauvé.
+>M Chain_oa_sel_CB ProeWin0 829 503 100c0 0 1532 0 0 768 1920 0 0 1080 13
+~ Command `ProCmdRegenAuto` 
+!ProgressBarDlg: Regen Started
+!ProgressBarDlg: Regen Completed
+!%CILa régénération automatique des pièces est terminée.
+~ LButtonArm `main_dlg_cur` `proe_win` 9 943 530 0 1 1532 768 1920 1080 18705466
+~ LButtonDisarm `main_dlg_cur` `proe_win` 9 943 530 0 0 1532 768 1920 1080 18705589
+@sel_pz_xyz 694.4580078125 261.4746093750 825.4923820869 340.7014901565 0.0000000000
+@ sel view 0
+ 0.640359 -0.172165 -0.963094 -0.529226 0.907154 -0.514046
+ 0.822868 0.717413 0.418877 524.662567 291.925192 -1701.977491 1.953125 0.000000 0
+@ stack attr 8
+@ stack attr -1 -1  1
+@ stack attr twk_s_eps
+~ Move `main_dlg_cur` `proe_win` 9 943 530 33554432 0 1532 768 1920 1080 18706076
+>M Chain_oa_sel_CB ProeWin0 943 530 c0 20000 1532 0 0 768 1920 0 0 1080 13
+~ Key `main_dlg_cur` `proe_win` 9 943 530 38993939 0 1532 768 1920 1080 18706076 `Ctrl+S`
+~ Command `ProCmdModelSave` 
+!%CIROBOT a été sauvé.
+~ Move `main_dlg_cur` `proe_win` 9 943 530 0 0 1532 768 1920 1080 18706369
+>M Chain_oa_sel_CB ProeWin0 943 530 c0 0 1532 0 0 768 1920 0 0 1080 13
+~ Close `main_dlg_cur` `main_dlg_cur`
+!Command ProCmdOSExit was pushed from the software.
+! Message Dialog: Warning
+!               : Creo Parametric Student Edition (for educational use only) va se fermer et les tâches non enregistrées seront perdues.
+!               : Voulez-vous vraiment quitter ?
+~ Activate `UI Message Dialog` `yes`
+!End of Trail File
