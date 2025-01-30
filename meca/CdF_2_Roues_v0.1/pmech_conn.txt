@@ -1,0 +1,18 @@
+       Diagnostics d'erreur pour l'échec de l'analyse/assemblage
+
+  Toutes les restrictions de position ne peuvent être satisfaites en même temps.
+Impossible de satisfaire les restrictions de position suivantes :
+
+
+1) Impossible de fermer la boucle cinématique suivante : Ground - body1 - body4
+- Ground
+
+
+2) Impossible de fermer la boucle cinématique suivante : Ground - body1 - body6
+- Ground
+
+
+3) Impossible de fermer la boucle cinématique suivante : Ground - body1 - body8
+- Ground
+
+

@@ -1,0 +1,36 @@
+﻿|***************************|
+    REFERENCE INFORMATION    
+|***************************|
+ Reference No.1 out of 1 
+
+Reference:
+   TYPE   : plane
+
+Status   : not in geometry
+
+
+Reference owner:
+ Model   :
+   NAME   : PATIE_FEMELLE 
+   TYPE   : Part
+ Feature :
+
+    FEATURE NUMBER       12
+    INTERNAL FEATURE ID  396077
+    PARENTS = 88(#8) 396063(#10) 396075(#11) 
+
+
+ FLATTEN QUILT
+
+  NO.   ELEMENT NAME             INFO                                           
+  ---   -------------            -------------                                  
+   1    Feature Name             Defined                                        
+   2    Surface Collection       Surf:F10(COPY_1)                               
+   3    Origin Point             PNT0:F11(DATUM POINT)                          
+   4    Placement option         No                                             
+   5    Parametrization Method   Automatic                                      
+   6    Parametrization Surface  Defined                                        
+   7    Symmetry Plane           Defined                                        
+
+
+
