@@ -1,0 +1,37 @@
+### .gitignore for CubeIDE project
+# Metadata of CubeIDE
+.metadata/
+
+# Setting of CubeIDE
+*/.settings/
+*/*.launch
+
+# VSCode setting and metadata files
+*/.vs/
+.vscode/
+
+
+# Projects files
+#*/.cproject
+#*/.project
+#*/.mxproject
+
+# Debug files
+*/Debug
+*/*Debug.launch
+
+# Linker script
+*/*.ld
+
+# Startup files
+*.s
+
+# Lauch files
+*.launch
+.vscode/
+
+# Makefile
+*/cmake/
+*/CmakeLists.txt
+*/CMakePresets.json
+*/vcpkg-configuration.json
