@@ -189,6 +189,28 @@ void BR_startRecordDistance(void);
 float BR_getDistance(BR_Motor_ID_t motor); 
 
 
+/**
+ * @brief Get the X coordinate of the robot
+ * 
+ * @return float X coordinate in m
+ */
+float BR_getX(void);
+
+/**
+ * @brief Get the Y coordinate of the robot
+ * 
+ * @return float Y coordinate in m
+ */
+float BR_getY(void);
+
+/**
+ * @brief Get the angle of the robot
+ * 
+ * @return float Angle in rad
+ */
+float BR_getTheta(void);
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -21,6 +21,8 @@
 #define BR_SPEED_CORRECTOR_KP			0.8
 #define BR_SPEED_CORRECTOR_KPD			0.0
 #define BR_SPEED_CORRECTOR_KPI			0.003		// Ancien : 0.003
+#define BR_FREQ_CLOCKSOURCE				16000000UL
+
 /* Global variables ----------------------------------------------------------*/
 Motor_Config motor_left;
 Motor_Config motor_right;
@@ -44,6 +46,10 @@ float dkRight;
 // Integral term for speed correction
 float ikLeft;
 float ikRight;
+
+// Time between 2 regulation loop
+float dt_s = 0.0; // in seconds
+
 
 uint8_t enable_flag = 0;
 
@@ -78,6 +84,7 @@ void BR_init(TIM_HandleTypeDef * TIM_Regulate,TIM_HandleTypeDef * TIM_Motor_Left
     Motor_Init(&motor_left, DIR_Port_Left, DIR_Pin_Left, TIM_Motor_Left, TIM_Channel_Motor_Left);
     Motor_Init(&motor_right, DIR_Port_Right, DIR_Pin_Right, TIM_Motor_Right, TIM_Channel_Motor_Right);
     Timer_Regulate = TIM_Regulate;
+	dt_s = (float)(Timer_Regulate->Init.Period + 1.0f) / ((float)BR_FREQ_CLOCKSOURCE / (Timer_Regulate->Init.Prescaler + 1.0f)); 
     
 	/* Init CAN interface */
     CAN_initInterface(hfdcan, CAN_ID_STM);
@@ -274,7 +281,17 @@ void BR_setSpeed(BR_Motor_ID_t motor,float speed) {
 	}
 }
 
+float BR_getX(void){
+	return Encoder_GetX();
+}
 
+float BR_getY(void){
+	return Encoder_GetY();
+}
+
+float BR_getTheta(void){
+	return Encoder_GetTheta();
+}
 
 void BR_regulateSpeed(void){
 	float currentSpeedLeft;
@@ -365,6 +382,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	Encoder_Overflow_Interrupt_Handler(htim);
 	if(htim == Timer_Regulate){
+		//Get the frequency of the timer
+		Encoder_Update_Odometry(dt_s);
 		BR_regulateSpeed();
 	}
 }
@@ -384,6 +403,13 @@ void BR_executeCommandFromCAN(void){
 
     uint32_t distance_mem = *((uint32_t*)&distance);
     BR_Motor_ID_t idMotor;
+
+	float x_coordinate = 0.0;
+	uint32_t x_coordinate_mem = *((uint32_t*)&x_coordinate);
+	float y_coordinate = 0.0;
+	uint32_t y_coordinate_mem = *((uint32_t*)&y_coordinate);
+	float theta = 0.0;
+	uint32_t theta_mem = *((uint32_t*)&theta);
 
     uint32_t test_data = 0;
 	switch (cmd[0]){
@@ -474,6 +500,41 @@ void BR_executeCommandFromCAN(void){
 		case 8:
 			BR_startRecordDistance();
 			break;
+
+		case 9:
+		    Encoder_Get_Odometry(&x_coordinate, &y_coordinate, &theta);
+			// Send X coordinate
+			x_coordinate_mem = *((uint32_t*)&x_coordinate);
+			dataToRaspi[0] = cmd[0];
+			dataToRaspi[1] = cmd[1];
+			dataToRaspi[2] = (x_coordinate_mem >> 24) & 0xFF;
+			dataToRaspi[3] = (x_coordinate_mem >> 16) & 0xFF;
+			dataToRaspi[4] = (x_coordinate_mem >> 8) & 0xFF;
+			dataToRaspi[5] = x_coordinate_mem & 0xFF;
+			CAN_send(dataToRaspi, 1, CAN_ID_MASTER);
+
+			// Send Y coordinate
+			y_coordinate_mem = *((uint32_t*)&y_coordinate);
+			dataToRaspi[0] = cmd[0];
+			dataToRaspi[1] = cmd[1];
+			dataToRaspi[2] = (y_coordinate_mem >> 24) & 0xFF;
+			dataToRaspi[3] = (y_coordinate_mem >> 16) & 0xFF;
+			dataToRaspi[4] = (y_coordinate_mem >> 8) & 0xFF;
+			dataToRaspi[5] = y_coordinate_mem & 0xFF;
+			CAN_send(dataToRaspi, 1, CAN_ID_MASTER);
+
+			// Send theta coordinate
+			theta_mem = *((uint32_t*)&theta);
+			dataToRaspi[0] = cmd[0];
+			dataToRaspi[1] = cmd[1];
+			dataToRaspi[2] = (theta_mem >> 24) & 0xFF;
+			dataToRaspi[3] = (theta_mem >> 16) & 0xFF;
+			dataToRaspi[4] = (theta_mem >> 8) & 0xFF;
+			dataToRaspi[5] = theta_mem & 0xFF;
+			CAN_send(dataToRaspi, 1, CAN_ID_MASTER);
+			
+			break;
+
 		default :
 			break;
 	}

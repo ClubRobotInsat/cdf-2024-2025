@@ -44,6 +44,8 @@
 
 
 #include "stm32g4xx_hal.h"
+#include <math.h>
+#include <stdint.h>
 
 
 /**
@@ -96,11 +98,40 @@ float Encoder_Left_Get_Speed(void);
  */
 float Encoder_Right_Get_Speed(void);
 
-
+/**
+ * @fn void Encoder_IC_Interrupt_Handler(TIM_HandleTypeDef *htim)
+ * @brief Handle when Encoder interrupt is risen 
+ * @param htim Timer of the Encoder
+ */
 void Encoder_IC_Interrupt_Handler(TIM_HandleTypeDef *htim);
+
+/**
+ * @fn void Encoder_Overflow_Interrupt_Handler(TIM_HandleTypeDef *htim)
+ * @brief Handle when Encoder overflow interrupt is risen
+ * @param htim Timer of the Encoder
+ */
 void Encoder_Overflow_Interrupt_Handler(TIM_HandleTypeDef *htim);
 
 
+/**
+ * @fn void Encoder_Update_Odometry(float dt)
+ * @brief Update the odometry of the robot calculated from the encoders
+ * @param dt Time step in seconds
+ */
+void Encoder_Update_Odometry(float dt);
+
+/**
+ * @fn void Encoder_Get_Odometry(float *x, float *y, float *theta)
+ * @brief Get the odometry of the robot
+ * @param x X position in meter : float
+ * @param y Y position in meter : float
+ * @param theta Angle in radian : float
+ */
+void Encoder_Get_Odometry(float *x, float *y, float *theta);
+
+float Encoder_GetX(void);
+float Encoder_GetY(void);
+float Encoder_GetTheta(void);
 
 #endif
 
